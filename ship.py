@@ -15,7 +15,7 @@ class Ship:
 
         # Load an image of a rocket ship. 
         # Then get the rectangle (rect) of the image.
-        self.image = pygame.image.load("images/ship.bmp")
+        self.image = pygame.image.load("images/ship_compressed.bmp")
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center of the screen.
