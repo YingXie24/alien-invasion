@@ -14,9 +14,11 @@ class AlienInvasion:
         # Create an instance of Settings so that we can use it to access settings later
         self.settings = Settings()
 
-        # Create a display window.
-        self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+        # Allow running the game in fullscreen mode
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+
         pygame.display.set_caption("Alien Invasion")
 
         # Create an instance of Ship. 
