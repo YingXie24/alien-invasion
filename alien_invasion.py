@@ -28,6 +28,9 @@ class AlienInvasion:
         # Note Ship() requires one argument, an instance of AlienInvasion
         self.ship = Ship(self)
 
+        # Create an instance for the whole group of bullets.
+        self.bullets = pygame.sprite.Group()
+
         # Save background colour as an attribute
         self.bg_color = self.settings.bg_color
 
@@ -36,6 +39,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
 
     def _check_events(self):
