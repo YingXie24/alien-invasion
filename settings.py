@@ -1,3 +1,5 @@
+# Module that initialises attributes controlling the game's appearance and the ship's speed. 
+
 class Settings:
     """A class to store all settings for Alien Invasion."""
 

@@ -1,3 +1,5 @@
+# The only file to run to play Alien Invasion.
+
 import sys
 import pygame
 from settings import Settings
@@ -14,6 +16,7 @@ class AlienInvasion:
         # Create an instance of Settings so that we can use it to access settings later
         self.settings = Settings()
 
+        #  Assign the main display surface to 'screen'.
         # Allow running the game in fullscreen mode
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
@@ -36,7 +39,7 @@ class AlienInvasion:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to keypresses, key releases and mouse events."""
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
