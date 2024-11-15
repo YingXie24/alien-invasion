@@ -103,22 +103,35 @@ class AlienInvasion:
         # Spacing between each alien is equal to one alien width.
         # Keep width of one alien to the left of the first alien. 
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.screen_width - alien_width
         number_aliens_x = available_space_x // (2 * alien_width)
 
-        # Create the first row of aliens.
-        for alien_number in range(number_aliens_x):
-            self._create_alien(alien_number)
+        # Determine the number of rows of aliens that fit on the screen.
+        #  Leave one alien height from the top, two alien heights from the rocket, 
+        #   and the ship height from the bottom of the screen.
+        #  Keep gap of one alien height between each row.
+        ship_height = self.ship.rect.height
+        available_space_y = (self.settings.screen_height - (3 * alien_height) 
+                             - ship_height)
+        number_rows = available_space_y // (2 * alien_height)
 
-    def _create_alien(self, alien_number):
+        # Create the full fleet of aliens.
+        #  Outer loop: Count the number of rows of aliens we want.
+        for row_number in range(number_rows):
+            # Inner loop: Create one row of aliens.
+            for alien_number in range(number_aliens_x):
+                self._create_alien(alien_number, row_number)
+
+    def _create_alien(self, alien_number, row_number):
         """Create an alien and place it in the row."""
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         alien.x = alien_width + (2 * alien_width * alien_number)
         alien.rect.x = alien.x
+        alien.y = alien_height + (2 * alien_height * row_number)
+        alien.rect.y = alien.y
         self.aliens.add(alien)
-
 
     def _update_screen(self): 
         """Update images on the screen, and flip to the new screen."""
