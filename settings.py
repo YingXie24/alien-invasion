@@ -1,6 +1,5 @@
 # Module that initialises attributes controlling the game's appearance and the ship's speed. 
 # Storing settings in a separate class allows us to adjust them more easily.
-
 class Settings:
     """A class to store all settings for Alien Invasion."""
 
@@ -13,6 +12,7 @@ class Settings:
 
         # Ship settings
         self.ship_speed = 1.5
+        self.ship_limit = 3
 
         # Bullet settings
         self.bullet_speed = 2.0
@@ -26,3 +26,6 @@ class Settings:
         self.fleet_drop_speed = 20
         #  fleet_direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
+
+        # Pause settings when alien hits ship
+        self.pause_time = 1
