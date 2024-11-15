@@ -100,7 +100,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
         
     def _check_bullet_alien_collisions(self):
-        """Respond to bullet-alien collisions."""
+        """Respond when a bullet hits an alien."""
         # Check for any bullets that have hit aliens.
         #  If so, get rid of the bullet and the alien.
         collisions = pygame.sprite.groupcollide(
@@ -119,6 +119,10 @@ class AlienInvasion:
         """
         self._check_fleet_edges()
         self.aliens.update()
+
+        # Look for when an alien collides with the ship.
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship has been hit!!!")
                 
     def _create_fleet(self):
         """Create a fleet of aliens."""
