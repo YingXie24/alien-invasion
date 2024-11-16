@@ -52,9 +52,13 @@ class AlienInvasion:
         """Start the main loop for the game."""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+        
+            # If all ships have been used up, the game should freeze.
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+            
             self._update_screen()
 
     def _check_events(self):
@@ -123,7 +127,7 @@ class AlienInvasion:
     def _update_aliens(self):
         """Check if the fleet is at the edge of the screen,
             then update the positions of aliens in the fleet.
-             Also check if any alien in the fleet has hit the ship,
+             Also check if any alien has hit the ship,
               or hit the bottom of the screen.
         """
         self._check_fleet_edges()
@@ -189,22 +193,26 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien."""
-        # Decrease the number of ships left.
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Decrease the number of ships left.
+            self.stats.ships_left -= 1
 
-        # Clear out all remaining aliens and bullets.
-        self.aliens.empty()
-        self.bullets.empty()
+            # Clear out all remaining aliens and bullets.
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # Create a new fleet and center the ship.
-        self._create_fleet()
-        self.ship.center_ship()
+            # Create a new fleet and center the ship.
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # Pause to allow user to regroup.
-        sleep(self.settings.pause_time)
+            # Pause to allow user to regroup.
+            sleep(self.settings.pause_time)
+
+        else:
+            self.stats.game_active = False
 
     def _check_aliens_bottom(self):
-        """Check if any aleins have reached the bottom of the screen."""
+        """Check if any aliens have reached the bottom of the screen."""
         screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= screen_rect.bottom:
