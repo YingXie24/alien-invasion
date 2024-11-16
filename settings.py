@@ -32,12 +32,15 @@ class Settings:
         self.starting_speed()
 
     def starting_speed(self):
-        """Set up the initial speed. 
+        """Set up the initial settings. 
         These settings will change throughout the game.
         """
         self.ship_speed = 1.5
         self.bullet_speed = 2.0
         self.alien_speed = 0.5
+
+        # Scoring
+        self.alien_points = 50
 
         #  fleet_direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1

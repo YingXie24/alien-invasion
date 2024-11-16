@@ -121,6 +121,7 @@ class AlienInvasion:
         # Reset the game statistics. 
         self.stats.reset_stats()
         self.stats.game_active = True
+        self.sb.prep_score()
 
         # Hide the mouse cursor when the game is going.
         pygame.mouse.set_visible(False)
@@ -157,6 +158,10 @@ class AlienInvasion:
         #  If so, get rid of the bullet and the alien.
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True, True)
+        
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
     
         # Check whether the entire alien fleet is destroyed.
         #  If yes, a new fleet should appear.
