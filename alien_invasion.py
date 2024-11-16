@@ -70,13 +70,18 @@ class AlienInvasion:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                # Detect when the arrow key is pressed
+                # Detect when the arrow key is pressed.
                 elif event.type == pygame.KEYDOWN:
                     self._check_keydown_events(event)
 
-                # Detect when the arrow key is released
+                # Detect when the arrow key is released.
                 elif event.type == pygame.KEYUP:
                     self._check_keyup_events(event)
+
+                # Detect when the mouse is clicked.
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    self._check_play_button(mouse_pos)
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
@@ -95,6 +100,11 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+
+    def _check_play_button(self, mouse_pos):
+        """Start a new game when the player clicks on the Play button."""
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -143,7 +153,6 @@ class AlienInvasion:
         
         # Look for aliens hitting the bottom of the screen.
         self._check_aliens_bottom()
-
 
     def _create_fleet(self):
         """Create a fleet of aliens."""
