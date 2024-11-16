@@ -165,6 +165,7 @@ class AlienInvasion:
             for aliens_list in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens_list)
             self.sb.prep_score()
+            self.sb.check_high_score()
     
         # Check whether the entire alien fleet is destroyed.
         #  If yes, a new fleet should appear.
