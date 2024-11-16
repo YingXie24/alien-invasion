@@ -108,6 +108,8 @@ class AlienInvasion:
             # Reset the game statistics. 
             self.stats.reset_stats()
             self.stats.game_active = True
+            # Hid the mouse cursor when the game is going.
+            pygame.mouse.set_visible(False)
 
             # Get rid of any remaining aliens and bullets.
             self.aliens.empty()
@@ -232,8 +234,11 @@ class AlienInvasion:
             # Pause to allow user to regroup.
             sleep(self.settings.pause_time)
 
+        # When player runs out of ship, the game ends.
         else:
             self.stats.game_active = False
+            # Make the cursor reappear.
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
