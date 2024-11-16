@@ -159,8 +159,11 @@ class AlienInvasion:
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True, True)
         
+        # When there is a collision, a dictionary is created.
         if collisions:
-            self.stats.score += self.settings.alien_points
+            # Key: A single bullet. Value: List of aliens hit by the bullet.
+            for aliens_list in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens_list)
             self.sb.prep_score()
     
         # Check whether the entire alien fleet is destroyed.
