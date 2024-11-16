@@ -11,7 +11,7 @@ class Settings:
         self.bg_color = (0, 22, 34)
 
         # Ship settings
-        self.ship_limit = 3
+        self.ship_limit = 2
 
         # Bullet settings
         self.bullet_width = 5
@@ -23,7 +23,7 @@ class Settings:
         self.fleet_drop_speed = 10
 
         # How quickly the aliens speed up (multiplier)
-        self.speedup_scale = 1.2
+        self.speedup_scale = 1.4
 
         # How quickly the value of aliens increases (multiplier).
         self.score_scale = 2.0
