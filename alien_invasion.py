@@ -209,11 +209,11 @@ class AlienInvasion:
         number_aliens_x = available_space_x // (2 * alien_width)
 
         # Determine the number of rows of aliens that fit on the screen.
-        #  Leave one alien height from the top, two alien heights from the rocket, 
+        #  Leave two alien height from the top, three alien heights from the rocket, 
         #   and the ship height from the bottom of the screen.
         #  Keep gap of one alien height between each row.
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * alien_height) 
+        available_space_y = (self.settings.screen_height - (5 * alien_height) 
                              - ship_height)
         number_rows = available_space_y // (2 * alien_height)
 
@@ -230,7 +230,7 @@ class AlienInvasion:
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + (2 * alien_width * alien_number)
         alien.rect.x = alien.x
-        alien.y = alien_height + (2 * alien_height * row_number)
+        alien.y = (2 * alien_height) + (2 * alien_height * row_number)
         alien.rect.y = alien.y
         self.aliens.add(alien)
 
