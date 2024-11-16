@@ -123,6 +123,8 @@ class AlienInvasion:
     def _update_aliens(self):
         """Check if the fleet is at the edge of the screen,
             then update the positions of aliens in the fleet.
+             Also check if any alien in the fleet has hit the ship,
+              or hit the bottom of the screen.
         """
         self._check_fleet_edges()
         self.aliens.update()
@@ -130,7 +132,11 @@ class AlienInvasion:
         # Look for when an alien collides with the ship.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
-                
+        
+        # Look for aliens hitting the bottom of the screen.
+        self._check_aliens_bottom()
+
+
     def _create_fleet(self):
         """Create a fleet of aliens."""
         # Find the number of aliens in a row.
@@ -197,6 +203,15 @@ class AlienInvasion:
         # Pause to allow user to regroup.
         sleep(self.settings.pause_time)
 
+    def _check_aliens_bottom(self):
+        """Check if any aleins have reached the bottom of the screen."""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                # Treat this the same as if the ship got hit.
+                self._ship_hit()
+                break
+
     def _update_screen(self): 
         """Update images on the screen, and flip to the new screen."""
         # Fill the screen with background color during each pass through the loop.
@@ -214,7 +229,6 @@ class AlienInvasion:
         # Make the most recently drawn screen visible.
         # Continually update the display to show the new positions of game elements. 
         pygame.display.flip()
-
 
 if __name__ == '__main__':
     # Make a game instance, and run the game.
