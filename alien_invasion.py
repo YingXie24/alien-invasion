@@ -73,7 +73,7 @@ class AlienInvasion:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self._end_game()
-                    
+
                 # Detect when the arrow key is pressed.
                 elif event.type == pygame.KEYDOWN:
                     self._check_keydown_events(event)
@@ -178,14 +178,19 @@ class AlienInvasion:
         # Check whether the entire alien fleet is destroyed.
         #  If yes, a new fleet should appear.
         if not self.aliens:
-            # Destroy existing bullets and create new fleet.
-            self.bullets.empty()
-            self._create_fleet()
-            self.settings.increase_speed()
+            self._start_new_level()
 
-            # Increase level.
-            self.stats.level += 1
-            self.sb.prep_level()
+    def _start_new_level(self):
+        """Clear existing bullets and create new fleet.
+            Increase speed of the new fleet and increase the value of the level.
+        """
+        self.bullets.empty()
+        self._create_fleet()
+    
+        self.settings.increase_speed()
+
+        self.stats.level += 1
+        self.sb.prep_level()
 
     def _update_aliens(self):
         """Check if the fleet is at the edge of the screen,
