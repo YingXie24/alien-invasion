@@ -142,9 +142,15 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
-        if len(self.bullets) < self.settings.bullets_allowed:
+        if len(self.bullets) < self.settings.bullets_allowed and self.stats.game_active:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+            self._play_sound("sounds/laser.mp3")
+
+    def _play_sound(self, sound_filepath):
+        pygame.mixer.init()
+        pygame.mixer.music.load(sound_filepath)
+        pygame.mixer.music.play()
     
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
@@ -167,6 +173,7 @@ class AlienInvasion:
         
         # When there is a collision, a dictionary is created.
         if collisions:
+            self._play_sound("sounds/arrow.mp3")
             # Key: A single bullet. Value: List of aliens hit by the bullet.
             for aliens_list in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens_list)
