@@ -189,6 +189,8 @@ class AlienInvasion:
         self.stats.level += 1
         self.sb.prep_level()
         self._play_sound(2, "sounds/level_up.mp3")
+        # Pause to allow user to regroup.
+        sleep(self.settings.pause_time_level_up)
         
     def _update_aliens(self):
         """Check if the fleet is at the edge of the screen,
@@ -275,7 +277,7 @@ class AlienInvasion:
             self._play_sound(3, "sounds/ship_lost.mp3")
 
             # Pause to allow user to regroup.
-            sleep(self.settings.pause_time)
+            sleep(self.settings.pause_time_ship_lost)
 
         # When player runs out of ship, the game ends.
         else:

@@ -29,7 +29,8 @@ class Settings:
         self.score_scale = 2.0
 
         # Pause settings when alien hits ship
-        self.pause_time = 1
+        self.pause_time_level_up = 1
+        self.pause_time_ship_lost = 2
 
         # Call the starting speed method to set up the values as attributes. 
         self.starting_speed()
