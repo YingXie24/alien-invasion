@@ -122,9 +122,7 @@ class AlienInvasion:
         # Reset the game statistics. 
         self.stats.reset_stats()
         self.stats.game_active = True
-        self.sb.prep_score()
-        self.sb.prep_level()
-        self.sb.prep_ships()
+        self.sb.prep_images()
 
         # Hide the mouse cursor when the game is going.
         pygame.mouse.set_visible(False)
