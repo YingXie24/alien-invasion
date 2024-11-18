@@ -72,7 +72,8 @@ class AlienInvasion:
         """Respond to keypresses, key releases and mouse events."""
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    sys.exit()
+                    self._end_game()
+                    
                 # Detect when the arrow key is pressed.
                 elif event.type == pygame.KEYDOWN:
                     self._check_keydown_events(event)
@@ -93,7 +94,7 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
-            sys.exit()
+            self._end_game()
         elif event.key == pygame.K_p:
             self._start_game()
         elif event.key == pygame.K_SPACE:
@@ -135,6 +136,11 @@ class AlienInvasion:
         # Create a new fleet and center the ship.
         self._create_fleet()
         self.ship.center_ship()
+
+    def _end_game(self):
+        with open('high_score.txt', 'w') as f:
+            f.write(str(self.stats.high_score))
+        sys.exit()
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
